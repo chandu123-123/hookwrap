@@ -6,6 +6,7 @@ import Pricing from './components/Pricing'
 import Pricing2 from './components/Pricing2'
 import Accordtion from './components/Accordtion'
 import Testimonials from './components/Testimonials'
+import Footer from './components/Footer'
 const Page = () => {
   return (
     <div className=''>
@@ -18,7 +19,10 @@ const Page = () => {
        
      </div>
      <Accordtion></Accordtion>
-     <Testimonials></Testimonials>
+     {/* <Testimonials></Testimonials> */}
+     <div>
+      <Footer></Footer>
+     </div>
     </div>
   )
 }
