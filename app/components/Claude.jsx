@@ -14,12 +14,16 @@ export default function Home() {
   const useremail = useSelector((state) => state.counter.credits);
   const [prompt, setPrompt] = useState('');
   const [topic, setTopic] = useState('');
-  const [language, setLanguage] = useState('english');
-  const [style, setStyle] = useState('Unexpected Connections');
+  const [language, setLanguage] = useState('English');
+  const [style, setStyle] = useState('Story Starters');
   const [response, setResponse] = useState('');
+  const [load, setload] = useState(false);
   const credits = useSelector((state) => state.counter.credits);
   const router=useRouter()
   const handleSubmit = async () => {
+
+   setload(true)
+
    console.log(credits,topic.length)
     if(topic.length==0){
       toast.error('Enter Prompt', {
@@ -32,10 +36,12 @@ export default function Home() {
         progress: undefined,
         theme: "dark",
         });
+        setload(false)
         return 
     }
     
     if(credits<=0){
+      setload(false)
       console.log(credits)
       toast.error('Credits out of Limit', {
         position: "top-right",
@@ -94,6 +100,7 @@ export default function Home() {
       setResponse('Error fetching response');
     }
   }
+  setload(false)
   };
 
   return (
@@ -108,18 +115,18 @@ export default function Home() {
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
           maxLength="100"
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md border bg-white shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           required
         />
         <p className="mt-2 text-sm text-gray-500">Characters: {topic.length}/100</p>
       </div>
       <div className="mb-4">
-        <label htmlFor="language" className="block text-sm font-medium text-gray-700">Select Language:</label>
+        <label htmlFor="language" className="block text-sm font-medium text-gray-700 ">Select Language:</label>
         <select
           id="language"
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
-          className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+          className="mt-1 block border bg-white w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
         >
           <option value="English">English</option>
           <option value="Telugu">Telugu</option>
@@ -132,11 +139,11 @@ export default function Home() {
           id="style"
           value={style}
           onChange={(e) => setStyle(e.target.value)}
-          className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+          className="mt-1 block w-full pl-3 pr-10 border py-2 text-base bg-white border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
         >
-<option value="curiosity-sparkers">Curiosity Sparkers</option>
-<option value="jaw-dropping-facts">Jaw-Dropping Facts</option>
 <option value="story-starters">Story Starters</option>
+<option value="jaw-dropping-facts">Jaw-Dropping Facts</option>
+<option value="curiosity-sparkers">Curiosity Sparkers</option>
 <option value="quotable-moments">Quotable Moments</option>
 <option value="mind-bending-contrasts">Mind-Bending Contrasts</option>
 <option value="vivid-visualizations">Vivid Visualizations</option>
@@ -171,9 +178,13 @@ export default function Home() {
       
       <button
         onClick={handleSubmit}
-        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+
       >
-        Generate Hook
+        {
+          load?<div> <span className="loading loading-bars loading-md"></span>
+ </div>:<h1         className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Generate Hook</h1>
+        }
+        
       </button>
       <h2 className="mt-6 text-xl font-semibold">Generated Hook:</h2>
       <p className="mt-2 text-gray-700">{response}</p>
