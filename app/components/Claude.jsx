@@ -97,7 +97,7 @@ export default function Home() {
     } catch (error) {
       console.log(error)
       console.error('Error fetching response:', error);
-      setResponse('Error fetching response');
+      setResponse('Server was Busy. Try after some time');
     }
   }
   setload(false)

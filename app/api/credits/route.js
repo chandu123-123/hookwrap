@@ -9,6 +9,7 @@ export async function POST(req,res) {
     const user=await userlogin.find({email})
     console.log(user[0])
     const credits=user[0].credits
+    console.log(credits)
     console.log(body)
     return NextResponse.json({credits:credits})
 }
