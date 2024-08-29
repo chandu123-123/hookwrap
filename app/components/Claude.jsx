@@ -61,7 +61,7 @@ export default function Home() {
 
     
     try {
-      const result = await fetch(`${NEXT_PUBLIC_LOCALURL}/api/claude`, {
+      const result = await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/claude`, {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: topic,style:style,language:language })  // Update to send the topic as prompt

@@ -17,7 +17,7 @@ const CreditsDisplay = () => {
     if (session?.user?.email) {
       const fetchCredits = async () => {
         try {
-          const response = await fetch(`${NEXT_PUBLIC_LOCALURL}/api/credits`, {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/credits`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

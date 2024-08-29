@@ -20,7 +20,7 @@ const Hero = () => {
       if (session?.user?.email) {
         try {
           console.log("hello")
-          const response = await fetch(`${NEXT_PUBLIC_LOCALURL}/api/credits`, {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/credits`, {
             method: 'POST', // Use POST method to send the body data
             headers: {
               'Content-Type': 'application/json', // Set the correct header
