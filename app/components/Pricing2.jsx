@@ -1,9 +1,47 @@
-import React from 'react'
-import Pricing from './Pricing'
+"use client"
 
+import React from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Pricing from './Pricing'
+import { useSession } from 'next-auth/react';
 const Pricing2 = () => {
+  const { data: session } = useSession();
+  const handlesubmit = async () => {
+    if(!session?.user?.email){
+      toast.error('Please Login', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
+    else{
+    try {
+      const response = await fetch(`${NEXT_PUBLIC_LOCALURL}/api/purchaseproduct`, {
+        method: "POST",
+        body: JSON.stringify({ productId: "496586" ,email:`${session?.user?.email}`}) // Convert your payload to a JSON string
+      });
+      
+    //  console.log(res)
+      const res = await response.json();
+      console.log(res);
+
+      window.open(res.checkoutUrl,"_blank")
+    // Optionally, update state with response
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+  };
+
   return (
     <div>
+       <ToastContainer />
    
    
    
@@ -16,7 +54,7 @@ const Pricing2 = () => {
               <span class="text-sm font-semibold leading-6 tracking-wide text-gray-600">Rupees /-</span>
             </p>
             <div  class="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                <Pricing></Pricing>
+                <button onClick={handlesubmit}>Buy Now</button>
             </div>
             <p class="mt-6 text-xs leading-5 text-gray-600">Invoices and receipts available for easy company reimbursement</p>
           </div>

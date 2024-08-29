@@ -1,21 +1,23 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { update } from "@/store/createslice";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreditsDisplay = () => {
   const { data: session } = useSession();
   const credits = useSelector((state) => state.counter.credits);
   const dispatch = useDispatch();
   const [userCredits, setUserCredits] = useState(credits);
+  const prevCreditsRef = useRef(credits);
 
   useEffect(() => {
-    // Fetch credits when session is active
     if (session?.user?.email) {
       const fetchCredits = async () => {
         try {
-          const response = await fetch('/api/credits', {
+          const response = await fetch(`${NEXT_PUBLIC_LOCALURL}/api/credits`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -32,6 +34,16 @@ const CreditsDisplay = () => {
           dispatch(update(data.credits)); // Update the credits in Redux store
         } catch (error) {
           console.error('Error fetching credits:', error);
+          toast.error('Error fetching credits', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "dark",
+          });
         }
       };
 
@@ -39,9 +51,23 @@ const CreditsDisplay = () => {
     }
   }, [session, dispatch]);
 
-  // Listen for updates to credits from Redux
   useEffect(() => {
-    setUserCredits(credits);
+    if (credits !== prevCreditsRef.current) { // Only show toast if credits have changed
+      if (credits > prevCreditsRef.current) {
+        toast.success('Credits Added', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "dark",
+        });
+      } 
+      setUserCredits(credits);
+      prevCreditsRef.current = credits; // Update the previous credits reference
+    }
   }, [credits]);
 
   if (!session) {
@@ -50,6 +76,7 @@ const CreditsDisplay = () => {
 
   return (
     <div className="credits-display">
+      <ToastContainer />
       <p>Your Credits: {userCredits}</p>
     </div>
   );

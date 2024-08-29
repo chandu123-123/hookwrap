@@ -61,7 +61,7 @@ export default function Home() {
 
     
     try {
-      const result = await fetch('http://localhost:3000/api/claude', {
+      const result = await fetch(`${NEXT_PUBLIC_LOCALURL}/api/claude`, {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: topic,style:style,language:language })  // Update to send the topic as prompt
@@ -72,7 +72,7 @@ export default function Home() {
 
       dispatch(decrement(2));
    console.log("hello")
-       const response = await fetch('http://localhost:3000/api/decreasecredits', {
+       const response = await fetch(`${NEXT_PUBLIC_LOCALURL}/api/decreasecredits`, {
             method: 'POST', // Use POST method to send the body data
             headers: {
               'Content-Type': 'application/json', // Set the correct header
@@ -83,16 +83,16 @@ export default function Home() {
         const upd=await response.json()
        console.log(upd)
       
-      toast.success(`Credits rem ${credits-2} `, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "dark",
-        });
+      // toast.success(`Credits rem ${credits-2} `, {
+      //   position: "top-right",
+      //   autoClose: 2000,
+      //   hideProgressBar: false,
+      //   closeOnClick: false,
+      //   pauseOnHover: true,
+      //   draggable: false,
+      //   progress: undefined,
+      //   theme: "dark",
+      //   });
 
     } catch (error) {
       console.log(error)

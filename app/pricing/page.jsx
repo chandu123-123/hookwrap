@@ -1,6 +1,6 @@
-
 import React from "react";
 import Pricing from "../components/Pricing";
+import Pricing2 from "../components/Pricing2";
 
 const page = () => {
   return (
@@ -15,7 +15,7 @@ const page = () => {
             <span className="font-bold text-[2rem] p-3">₹ 25</span>/ Life Time
           </h2>
          
-         <Pricing></Pricing>
+         <Pricing2></Pricing2>
         </div>
       </div>
     </div>

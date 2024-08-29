@@ -13,7 +13,7 @@ const Navbar = () => {
            </div>
            <div className=''>
             <ul className='flex  gap-4'>
-                <Link href="#pricing">Pricing</Link>
+                <Link href="/#pricing">Pricing</Link>
                 <Link href="#faq"pr>FAQ</Link>
                {session?.user?.email ? <button onClick={() => signOut({ callbackUrl: '/' })}>Logout</button>: <button onClick={() => signIn('google',{ callbackUrl: '/' })}>Login</button>}
                <li>
