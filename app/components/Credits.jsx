@@ -53,18 +53,18 @@ const CreditsDisplay = () => {
 
   useEffect(() => {
     if (credits !== prevCreditsRef.current) { // Only show toast if credits have changed
-      if (credits > prevCreditsRef.current) {
-        toast.success('Credits Added', {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: "dark",
-        });
-      } 
+      // if (credits > prevCreditsRef.current) {
+      //   toast.success('Credits Added', {
+      //     position: "top-right",
+      //     autoClose: 2000,
+      //     hideProgressBar: false,
+      //     closeOnClick: false,
+      //     pauseOnHover: true,
+      //     draggable: false,
+      //     progress: undefined,
+      //     theme: "dark",
+      //   });
+      // } 
       setUserCredits(credits);
       prevCreditsRef.current = credits; // Update the previous credits reference
     }
