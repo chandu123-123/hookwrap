@@ -70,15 +70,16 @@ export default function Home() {
       console.log(re.msg.content[0].text);
       setResponse(re.msg.content[0].text);
 
-      dispatch(decrement(2));
-   console.log("hello")
-       const response = await fetch(`${NEXT_PUBLIC_LOCALURL}/api/decreasecredits`, {
+      
+       console.log("hello")
+       const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/decreasecredits`, {
             method: 'POST', // Use POST method to send the body data
             headers: {
               'Content-Type': 'application/json', // Set the correct header
             },
             body: JSON.stringify({ email: session.user.email,credit:credits-2 }),
         });
+        dispatch(decrement(2));
         console.log("hello")
         const upd=await response.json()
        console.log(upd)
