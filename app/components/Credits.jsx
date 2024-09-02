@@ -77,7 +77,7 @@ const CreditsDisplay = () => {
   return (
     <div className="credits-display">
       <ToastContainer />
-      <p>Your Credits: {userCredits}</p>
+      <p>Credits: {userCredits}</p>
     </div>
   );
 };
