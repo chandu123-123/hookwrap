@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { update } from "@/store/createslice";
 import { ToastContainer,toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 const Hero = () => {
   const router=useRouter()
   const [credits, setCredits] = useState(useSelector((state) => state.counter.credits));
@@ -71,7 +72,7 @@ const Hero = () => {
 
   return (
     
-   <div className='h-screen'>
+   <div >
      <ToastContainer/>
     <Navbar></Navbar>
      <div className='center flex flex-col items-center justify-center text-center '>
@@ -87,6 +88,10 @@ const Hero = () => {
      <div className='text-center'>
 
      <h1 className='mt-16 text-5xl '>10x of ChatGpt</h1>
+     </div>
+     <div className='flex justify-center items-center p-10 '>
+     <Image src={"/home/hero.jpg"} width={300} height={100} className='rounded-2xl ' alt='hero img'></Image>
+
      </div>
     
    </div>
