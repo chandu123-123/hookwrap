@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Pricing from './Pricing'
 import { useSession } from 'next-auth/react';
+import { CreditCard } from 'lucide-react';
 const Pricing2 = () => {
   const { data: session } = useSession();
   const handlesubmit = async () => {
@@ -44,26 +45,57 @@ const Pricing2 = () => {
 
   return (
     <div>
-       <ToastContainer />
-   
-   
-   
-      <div class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
-        <div class="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
-          <div class="mx-auto max-w-xs px-8">
-            <p class="text-base font-semibold text-gray-600">Most popular</p>
-            <p class="mt-6 flex items-baseline justify-center gap-x-2">
-              <span class="text-5xl font-bold tracking-tight text-gray-900">100</span>
-              <span class="text-sm font-semibold leading-6 tracking-wide text-gray-600 text-[40px]">₹</span>
-            </p>
-            <div  class="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                <button onClick={handlesubmit}>Buy Now</button>
+      <ToastContainer/>
+    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Choose Your Plan
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Get started with our most popular package
+          </p>
+        </div>
+        <div className="mt-8 bg-white shadow-lg rounded-lg overflow-hidden">
+          <div className="px-6 py-8">
+            <h3 className="text-center text-2xl font-semibold text-gray-900">Premium Package</h3>
+            <div className="mt-4 flex justify-center">
+              <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                Most Popular
+              </span>
             </div>
-            <p class="mt-6 text-xs leading-5 text-gray-600">Get 20 Credits for one Payment.</p>
-            <p class="mt-3 text-xs leading-5 text-gray-600">And make your content Viral</p>
-            <p class="mt-3 text-xs leading-5 text-red-600">Use Login email for Payment</p>
+            <p className="mt-4 text-center text-5xl font-extrabold text-gray-900">
+              ₹50
+            </p>
+            <p className="mt-4 text-center text-sm text-gray-500">
+              Get 20 Credits for one Payment
+            </p>
+            <ul className="mt-6 space-y-4">
+              <li className="flex items-center">
+                <svg className="flex-shrink-0 h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="ml-3 text-base text-gray-700">Make your content Viral</span>
+              </li>
+              <li className="flex items-center">
+                <svg className="flex-shrink-0 h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="ml-3 text-base text-gray-700">Use Login email for Payment</span>
+              </li>
+            </ul>
+          </div>
+          <div className="px-6 py-4 bg-gray-50">
+            <button
+              onClick={handlesubmit}
+              className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              <CreditCard className="mr-2 h-5 w-5" />
+              Buy Now
+            </button>
           </div>
         </div>
+      </div>
       </div>
     </div>
  
