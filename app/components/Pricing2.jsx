@@ -21,10 +21,12 @@ const Pricing2 = () => {
         });
     }
     else{
+     // console.log(process.env.NEXT_PUBLIC_LEMON_SQUEEZY_VARIANT)
+      
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/purchaseproduct`, {
         method: "POST",
-        body: JSON.stringify({ productId: `${process.env.LEMON_SQUEEZY_VARIANT}` ,email:`${session?.user?.email}`}) // Convert your payload to a JSON string
+        body: JSON.stringify({ productId: `${process.env.NEXT_PUBLIC_LEMON_SQUEEZY_VARIANT}` ,email:`${session?.user?.email}`}) // Convert your payload to a JSON string
       });
        //496586
        //496584 origin
