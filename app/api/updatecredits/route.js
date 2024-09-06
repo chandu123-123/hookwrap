@@ -12,7 +12,7 @@ export async function POST(req,res) {
     const credits=user1[0].credits
     const user = await userlogin.findOneAndUpdate(
         { email },
-        { $set: { credits: credits+10 } },
+        { $set: { credits: credits+20 } },
         { new: true } // This option returns the modified document
     );
 

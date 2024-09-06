@@ -87,7 +87,7 @@ const Hero = () => {
      </div>
      <div className='text-center'>
 
-     <h1 className='mt-16 text-5xl '>10x of ChatGpt</h1>
+     <h1 className='mt-16 text-4xl '>Turn Posts into Internet 🚀Hits!</h1>
      </div>
      <div className='flex justify-center items-center p-10 '>
      <Image src={"/home/hero.jpg"} width={300} height={100} className='rounded-2xl ' alt='hero img'></Image>
