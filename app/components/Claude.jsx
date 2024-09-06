@@ -9,6 +9,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 export default function Home() {
   const { data: session } = useSession();
+  const [statements, setStatements] = useState([]);
 
   const dispatch = useDispatch();
   const useremail = useSelector((state) => state.counter.credits);
@@ -69,7 +70,8 @@ export default function Home() {
       const re = await result.json();
       console.log(re.msg.content[0].text);
       setResponse(re.msg.content[0].text);
-
+      const splitStatements = re.msg.content[0].text.split(/(?=\d+\.\s)/);
+      setStatements(splitStatements);
       
        console.log("hello")
        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/decreasecredits`, {
@@ -188,7 +190,14 @@ export default function Home() {
         
       </button>
       <h2 className="mt-6 text-xl font-semibold">Generated Hook:</h2>
-      <p className="mt-2 text-gray-700">{response}</p>
+   
+
+      <div className="mt-2 text-gray-700">
+      {statements.map((statement, index) => (
+        <p key={index}>{statement}</p>
+      ))}
+    </div>
+
     </div>
   );
 }

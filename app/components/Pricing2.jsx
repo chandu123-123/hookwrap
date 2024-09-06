@@ -24,9 +24,10 @@ const Pricing2 = () => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/purchaseproduct`, {
         method: "POST",
-        body: JSON.stringify({ productId: "496586" ,email:`${session?.user?.email}`}) // Convert your payload to a JSON string
+        body: JSON.stringify({ productId: `${process.env.LEMON_SQUEEZY_VARIANT}` ,email:`${session?.user?.email}`}) // Convert your payload to a JSON string
       });
-      
+       //496586
+       //496584 origin
     //  console.log(res)
       const res = await response.json();
       console.log(res);

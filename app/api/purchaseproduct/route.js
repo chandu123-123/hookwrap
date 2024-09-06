@@ -49,6 +49,7 @@ export async function POST(req) {
               },
             },
           },
+          user_email: "chandancheripallyssr@gmail.com",
         },
       }),
     });
