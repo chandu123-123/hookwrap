@@ -8,7 +8,7 @@ const page = () => {
    
       <h1 className='text-[2rem]'><strong>Contact Us</strong></h1>
       <p>If you have any queries, please contact us through </p>
-      <a href="mail:to">contacthookwrap@gmail.com</a>
+      <a href="mail:to">contactfresheresume@gmail.com</a>
   
 
 
