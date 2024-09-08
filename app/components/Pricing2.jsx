@@ -46,12 +46,10 @@ const Pricing2 = () => {
   return (
     <div>
       <ToastContainer/>
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
+  
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Choose Your Plan
-          </h2>
+       
           <p className="mt-2 text-center text-sm text-gray-600">
             Get started with our most popular package
           </p>
@@ -67,9 +65,7 @@ const Pricing2 = () => {
             <p className="mt-4 text-center text-5xl font-extrabold text-gray-900">
               ₹50
             </p>
-            <p className="mt-4 text-center text-sm text-gray-500">
-              Get 20 Credits for one Payment
-            </p>
+          
             <ul className="mt-6 space-y-4">
               <li className="flex items-center">
                 <svg className="flex-shrink-0 h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
@@ -81,7 +77,13 @@ const Pricing2 = () => {
                 <svg className="flex-shrink-0 h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
-                <span className="ml-3 text-base text-gray-700">Use Login email for Payment</span>
+                <span className="ml-3 text-base text-gray-700">Boost your Followers</span>
+              </li>
+              <li className="flex items-center">
+                <svg className="flex-shrink-0 h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="ml-3 text-base text-gray-700"> Get 20 Credits for one Payment</span>
               </li>
             </ul>
           </div>
@@ -96,7 +98,7 @@ const Pricing2 = () => {
           </div>
         </div>
       </div>
-      </div>
+    
     </div>
  
 
