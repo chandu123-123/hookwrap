@@ -8,7 +8,7 @@ import {
   
 const Accordtion = () => {
   return (
-    <div id='faq' className='bg-gray border-solid-2px rounded-xl p-2'>
+    <div id='faq' className='bg-gray border-solid-2px rounded-xl p-2 mt-14'>
         <h1 className='text-[3rem] font-medium'>FAQ</h1>
       <Accordion type="single" collapsible>
   <AccordionItem value="item-1">
