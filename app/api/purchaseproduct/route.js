@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-
 export const dynamic = "force-dynamic";
+
 
 export async function POST(req) {
   console.log("Received request");
@@ -8,6 +8,10 @@ export async function POST(req) {
   try {
     const reqData = await req.json();
     console.log("Request Data:", reqData);
+
+   
+    console.log(reqData.email)
+
 
     if (!reqData.productId) {
       return new Response(
@@ -30,7 +34,8 @@ export async function POST(req) {
           attributes:{
              checkout_data:{
               custom:{
-                 user_id:"123"
+                 user_id:"123",
+                 user_email:`${reqData.email}`
               },
             },
             //user_email:`${reqData.email}`,

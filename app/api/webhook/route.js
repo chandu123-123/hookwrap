@@ -1,13 +1,16 @@
 import crypto from 'crypto';
 import { NextResponse } from 'next/server';
+import { seed } from 'shortid';
 
 export async function POST(req) {
+  console.log("hello")
   try {
     // Catch the event type
+   
     const clonedReq = req.clone();
     const eventType = req.headers.get('X-Event-Name');  // assuming 'X-Name' is the header for event type
     const body = await req.json();  // parsing JSON body
-
+   console.log(body.meta.custom_data.user_email)
     // Check signature
     const secret = process.env.LEMON_SQUEEZY_WEBHOOK_SIGNATURE;
     const hmac = crypto.createHmac('sha256', secret);
@@ -33,7 +36,7 @@ export async function POST(req) {
       const res2= await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/updatecredits`, {
         method: "POST",
         body: JSON.stringify({
-          email:body.data.attributes.user_email
+          email:body.meta.custom_data.user_email
         }),
       });
        const cred2=await res2.json();
