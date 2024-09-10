@@ -6,8 +6,6 @@ import { userlogin } from '@/app/lib/model';
 export async function POST(req) {
   console.log("hello")
   try {
-    // Catch the event type
-   
     const clonedReq = req.clone();
     const eventType = req.headers.get('X-Event-Name');  // assuming 'X-Name' is the header for event type
     const body = await req.json();  // parsing JSON body
@@ -33,10 +31,8 @@ export async function POST(req) {
       // Add your logic here for handling the order created event
       // e.g., updating the database, sending a confirmation email, etc.
     if(isSuccessful){
-
       await dbconnection();
         console.log(body.data.attributes)
-
         const user1=await userlogin.find({email:body.meta.custom_data.user_email})
         console.log(user1[0])
         const credits=user1[0].credits
@@ -45,13 +41,8 @@ export async function POST(req) {
             { $set: { credits: credits+20 } },
             { new: true } // This option returns the modified document
         );
-    
-  
     }}
-
-    // Respond with success
     return NextResponse.json({ message: 'webhooks processed successfully' })
-
   } catch (err) {
     console.error(err);
     return NextResponse.json({ message: 'Server error' })
