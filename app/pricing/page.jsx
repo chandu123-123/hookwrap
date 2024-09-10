@@ -1,5 +1,5 @@
 import React from "react";
-import Pricing from "../components/Pricing";
+
 import Pricing2 from "../components/Pricing2";
 
 const page = () => {
