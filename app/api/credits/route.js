@@ -6,7 +6,8 @@ export async function POST(req,res) {
     const body=await req.json();
     await dbconnection();
     const {email}=body
-    const user=await userlogin.find({email})
+    console.log(email)
+    const user=await userlogin.find({email:email})
     console.log(user[0])
     const credits=user[0].credits
     console.log(credits)

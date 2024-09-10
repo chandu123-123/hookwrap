@@ -1,7 +1,8 @@
 import crypto from 'crypto';
 import { NextResponse } from 'next/server';
 import { seed } from 'shortid';
-
+import { dbconnection } from '@/app/lib/database'; // Ensure this exports a function to connect to MongoDB
+import { userlogin } from '@/app/lib/model'; 
 export async function POST(req) {
   console.log("hello")
   try {
@@ -32,15 +33,19 @@ export async function POST(req) {
       // Add your logic here for handling the order created event
       // e.g., updating the database, sending a confirmation email, etc.
     if(isSuccessful){
+
+      await dbconnection();
         console.log(body.data.attributes)
-      const res2= await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/updatecredits`, {
-        method: "POST",
-        body: JSON.stringify({
-          email:body.meta.custom_data.user_email
-        }),
-      });
-       const cred2=await res2.json();
-       console.log(cred2);
+
+        const user1=await userlogin.find({email:body.meta.custom_data.user_email})
+        console.log(user1[0])
+        const credits=user1[0].credits
+        const user = await userlogin.findOneAndUpdate(
+            { email:body.meta.custom_data.user_email },
+            { $set: { credits: credits+20 } },
+            { new: true } // This option returns the modified document
+        );
+    
   
     }}
 

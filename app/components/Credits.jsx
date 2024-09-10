@@ -14,6 +14,7 @@ const CreditsDisplay = () => {
   const prevCreditsRef = useRef(credits);
 
   useEffect(() => {
+    console.log(session?.user?.email)
     if (session?.user?.email) {
       const fetchCredits = async () => {
         try {
@@ -34,16 +35,16 @@ const CreditsDisplay = () => {
           dispatch(update(data.credits)); // Update the credits in Redux store
         } catch (error) {
           console.error('Error fetching credits:', error);
-          toast.error('Error fetching credits', {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: false,
-            progress: undefined,
-            theme: "dark",
-          });
+          // toast.error('Error fetching credits', {
+          //   position: "top-right",
+          //   autoClose: 2000,
+          //   hideProgressBar: false,
+          //   closeOnClick: false,
+          //   pauseOnHover: true,
+          //   draggable: false,
+          //   progress: undefined,
+          //   theme: "dark",
+          // });
         }
       };
 
@@ -53,18 +54,6 @@ const CreditsDisplay = () => {
 
   useEffect(() => {
     if (credits !== prevCreditsRef.current) { // Only show toast if credits have changed
-      // if (credits > prevCreditsRef.current) {
-      //   toast.success('Credits Added', {
-      //     position: "top-right",
-      //     autoClose: 2000,
-      //     hideProgressBar: false,
-      //     closeOnClick: false,
-      //     pauseOnHover: true,
-      //     draggable: false,
-      //     progress: undefined,
-      //     theme: "dark",
-      //   });
-      // } 
       setUserCredits(credits);
       prevCreditsRef.current = credits; // Update the previous credits reference
     }
