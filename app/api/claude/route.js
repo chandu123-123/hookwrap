@@ -3,10 +3,21 @@ import axios from "axios";
 import { Anthropic } from '@anthropic-ai/sdk';
 import { NextResponse } from "next/server";
 export async function POST(req, res) {
+
+  
   console.log("hello")
     const data=await req.json();
     console.log(data)
-    const { prompt,style,language } = data;
+    const { prompt,style,language,email } = data;
+    const usercred = await userlogin.findOne({ email });
+    if(!usercred)
+    {
+        return NextResponse.json({msg:"Not authorized"})
+    }
+    if(usercred.credits<2){
+        return NextResponse.json({msg:"Please purchase Credits"})
+    }
+    }
     let lang=""
     console.log(language)
     if(language=="english"){
@@ -19,7 +30,7 @@ export async function POST(req, res) {
     const anthropic = new Anthropic({
       apiKey: process.env.NEXT_PUBLIC_CLAUDE,
     });
-  // console.log(process.env.NEXT_PUBLIC_CLAUDE)
+
   try {
     const msg = await anthropic.messages.create({
       model: "claude-3-5-sonnet-20240620",
@@ -32,10 +43,5 @@ export async function POST(req, res) {
     console.error('Error:', error);
     return NextResponse.json({error});
   }
-
-
-
-   
-  
 
 }
