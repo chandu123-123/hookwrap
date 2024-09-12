@@ -8,8 +8,8 @@ export async function POST(req,res) {
     const {email}=body
     const usercred = await userlogin.findOne({ email });
     if(!usercred)
-    {
-        return NextResponse.json({msg:"Not authorized"})
+    {     
+        return NextResponse.json({msg:"Not authorized"},{ status: 400 })
     }
     console.log(usercred.credits)
     let cred=usercred.credits-2;

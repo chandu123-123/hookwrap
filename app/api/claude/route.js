@@ -2,22 +2,25 @@
 import axios from "axios";
 import { Anthropic } from '@anthropic-ai/sdk';
 import { NextResponse } from "next/server";
+import { dbconnection } from "@/app/lib/database";
+import { userlogin } from "@/app/lib/model";
 export async function POST(req, res) {
 
-  
+  await dbconnection()
   console.log("hello")
     const data=await req.json();
     console.log(data)
     const { prompt,style,language,email } = data;
     const usercred = await userlogin.findOne({ email });
     if(!usercred)
-    {
-        return NextResponse.json({msg:"Not authorized"})
+    { console.log("hell")
+      return NextResponse.json({ msg: "Not authorized" }, { status: 403 });
     }
     if(usercred.credits<2){
-        return NextResponse.json({msg:"Please purchase Credits"})
+      console.log("hell")
+      return NextResponse.json({ msg: "Please purchase Credits" }, { status: 400 });
     }
-    }
+    
     let lang=""
     console.log(language)
     if(language=="english"){
@@ -41,7 +44,7 @@ export async function POST(req, res) {
     return NextResponse.json({msg});
   } catch (error) {
     console.error('Error:', error);
-    return NextResponse.json({error});
+    return NextResponse.json({error},{ status: 400 });
   }
 
 }

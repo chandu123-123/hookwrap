@@ -67,7 +67,13 @@ export default function Home() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: topic,style:style,language:language,email: session.user.email })  // Update to send the topic as prompt
       });
+      if (!result.ok) {
+        const errorData = await result.json();
+        throw new Error(errorData.msg || 'Error fetching Claude response');
+      }
+        console.log("hello")
       const re = await result.json();
+    
       console.log(re.msg.content[0].text);
       setResponse(re.msg.content[0].text);
       const splitStatements = re.msg.content[0].text.split(/(?=\d+\.\s)/);
@@ -82,22 +88,11 @@ export default function Home() {
             },
             body: JSON.stringify({ email: session.user.email}),
         });
-
+        
         dispatch(decrement(2));
         console.log("hello")
         const upd=await response.json()
        console.log(upd)
-      
-      // toast.success(`Credits rem ${credits-2} `, {
-      //   position: "top-right",
-      //   autoClose: 2000,
-      //   hideProgressBar: false,
-      //   closeOnClick: false,
-      //   pauseOnHover: true,
-      //   draggable: false,
-      //   progress: undefined,
-      //   theme: "dark",
-      //   });
 
     } catch (error) {
       console.log(error)
