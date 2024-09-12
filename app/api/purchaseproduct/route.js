@@ -9,7 +9,7 @@ export async function POST(req) {
     const reqData = await req.json();
     console.log("Request Data:", reqData);
 
-   
+  
     console.log(reqData.email)
 
 
