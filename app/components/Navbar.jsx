@@ -11,7 +11,7 @@ const Navbar = () => {
    return (
         <div className='flex justify-between mt-5'>
            <div >
-           <Link href="/">HookUp</Link>
+           <Link href="/">HookWrap</Link>
            </div>
            <div className=''>
             <ul className='flex  gap-4'>

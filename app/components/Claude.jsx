@@ -106,7 +106,7 @@ export default function Home() {
   return (
     <div className="font-sans m-8">
       <ToastContainer />
-      <h1 className="text-2xl font-bold mb-4">Generate Hook with HookUp</h1>
+      <h1 className="text-2xl font-bold mb-4">Generate Hook with HookWrap</h1>
       <div className="mb-4">
         <label htmlFor="topic" className="block text-sm font-medium text-gray-700">Enter your Topic</label>
         <input
