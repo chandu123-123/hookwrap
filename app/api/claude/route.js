@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 import { dbconnection } from "@/app/lib/database";
 import { userlogin } from "@/app/lib/model";
 export async function POST(req, res) {
-
   await dbconnection()
   console.log("hello")
     const data=await req.json();

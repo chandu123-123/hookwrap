@@ -18,13 +18,12 @@ const CreditsDisplay = () => {
     if (session?.user?.email) {
       const fetchCredits = async () => {
         try {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/credits`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: session.user.email }),
-          });
+       const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/credits?email=${session.user.email}`, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
           if (!response.ok) {
             throw new Error('Failed to fetch credits');
