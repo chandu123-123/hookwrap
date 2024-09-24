@@ -1,11 +1,18 @@
 import { dbconnection } from '@/app/lib/database'; // Ensure this exports a function to connect to MongoDB
 import { userlogin } from '@/app/lib/model'; 
 import { NextResponse } from 'next/server';
+import { applyRateLimit } from '@/app/lib/middleware/rateLimiter';
+import { isEmail } from 'validator';
 export async function POST(req,res) {
+
+
     console.log("hello")
     const body=await req.json();
     await dbconnection();
     const {email}=body
+    if (!isEmail(email)) {
+        return NextResponse.json({ msg: "Invalid email format" }, { status: 400 });
+      }
     const usercred = await userlogin.findOne({ email });
     if(!usercred)
     {     

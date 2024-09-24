@@ -3,13 +3,22 @@ import axios from "axios";
 import { Anthropic } from '@anthropic-ai/sdk';
 import { NextResponse } from "next/server";
 import { dbconnection } from "@/app/lib/database";
+import { applyRateLimit } from '@/app/lib/middleware/rateLimiter';
 import { userlogin } from "@/app/lib/model";
+import { isEmail } from 'validator';
 export async function POST(req, res) {
   await dbconnection()
+
+  
+
+
   console.log("hello")
     const data=await req.json();
     console.log(data)
     const { prompt,style,language,email } = data;
+    if (!isEmail(email)) {
+      return NextResponse.json({ msg: "Invalid email format" }, { status: 400 });
+    }
     const usercred = await userlogin.findOne({ email });
     if(!usercred)
     { console.log("hell")

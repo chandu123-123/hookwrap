@@ -1,33 +1,39 @@
-import { dbconnection } from '@/app/lib/database'; // Ensure this exports a function to connect to MongoDB
-import { userlogin } from '@/app/lib/model'; 
+// /pages/api/credits.js
+import { dbconnection } from '@/app/lib/database';
+import { userlogin } from '@/app/lib/model';
 import { NextResponse } from 'next/server';
-
+import { applyRateLimit } from '@/app/lib/middleware/rateLimiter';
+import { isEmail } from 'validator';
 export async function GET(req) {
-    console.log("hello");
-    
-    // Extract email from the query parameters
-    const { searchParams } = new URL(req.url);
-    const email = searchParams.get('email');
+  try {
 
+    console.log("Applying rate limit...");
+    await applyRateLimit(req, new NextResponse());
+    console.log("Rate limit applied.");
+
+    const url = new URL(req.url);
+    const email = url.searchParams.get('email');
+    if (!isEmail(email)) {
+      return NextResponse.json({ msg: "Invalid email format" }, { status: 400 });
+    }
     if (!email) {
-        return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+      return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
-    // Connect to the database
     await dbconnection();
-    
-    console.log(email);
-    
-    // Find the user by email
-    const user = await userlogin.find({ email: email });
-    
+
+    const user = await userlogin.find({ email });
+
     if (!user || user.length === 0) {
-        return NextResponse.json({ error: 'User not found' }, { status: 404 });
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
-    
+
     const credits = user[0].credits;
-    console.log(credits);
-    
+
     // Return the credits in the response
-    return NextResponse.json({ credits: credits });
+    return NextResponse.json({ credits });
+  } catch (error) {
+    console.log("Error:", error.message);
+    return NextResponse.json({ error: 'Too many requests, please try again later.' }, { status: 429 });
+  }
 }

@@ -21,12 +21,11 @@ const Hero = () => {
       if (session?.user?.email) {
         try {
           console.log("hello")
-          const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/credits`, {
-            method: 'POST', // Use POST method to send the body data
+          const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/credits?email=${session.user.email}`, {
+            method: 'GET',
             headers: {
-              'Content-Type': 'application/json', // Set the correct header
+              'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email: session.user.email }),
           });
 
           if (!response.ok) {
