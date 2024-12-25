@@ -39,7 +39,7 @@ export async function POST(req, res) {
     }
     console.log(lang)
     const anthropic = new Anthropic({
-      apiKey: process.env.NEXT_PUBLIC_CLAUDE,
+      apiKey: process.env.CLAUDE_API,
     });
 
   try {

@@ -1,4 +1,4 @@
-import { dbconnection } from '@/app/lib/database'; // Ensure this exports a function to connect to MongoDB
+import { dbconnection } from '@/app/lib/database'; 
 import { userlogin } from '@/app/lib/model'; 
 import { NextResponse } from 'next/server';
 import { applyRateLimit } from '@/app/lib/middleware/rateLimiter';
